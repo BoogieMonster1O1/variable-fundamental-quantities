@@ -31,8 +31,8 @@ export interface Parameters {
  */
 export class Quantity {
     public static readonly QUANTITIES: Quantity[] = [];
-    private readonly unit: string;
-    private readonly shortUnit: string;
+    private readonly _unit: string;
+    private readonly _shortUnit: string;
     private readonly _vector: Fraction[];
     private readonly _name: string;
 
@@ -44,8 +44,8 @@ export class Quantity {
 
     private constructor(name: string, unit: string, shortUnit: string, vector: Fraction[]) {
         this._name = name;
-        this.unit = unit;
-        this.shortUnit = shortUnit;
+        this._unit = unit;
+        this._shortUnit = shortUnit;
         this._vector = vector;
     }
 
@@ -79,6 +79,18 @@ export class Quantity {
 
     public get vector(): Fraction[] {
         return this._vector;
+    }
+
+    public get name(): string {
+        return this._name;
+    }
+
+    public get unit(): string {
+        return this._unit;
+    }
+
+    public get shortUnit(): string {
+        return this._shortUnit;
     }
 
     // Dimensionless

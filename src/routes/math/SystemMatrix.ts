@@ -40,4 +40,23 @@ export class SystemMatrix {
             return row.reduce((a, b) => a.multiply(b), qty.vector[0]);
         });
     }
+
+    public getUnitString(vector: Fraction[]): string {
+        let main: string = "";
+        for (let i = 0; i < this.quantities.length; i++) {
+            if (vector[i].numerator !== 0) {
+                if (main.length > 0) {
+                    main += " ";
+                }
+                main += this.quantities[i].shortUnit;
+                main += vector[i].numerator > 0 ? "" : "-";
+                if (vector[i].isInteger()) {
+                    main += Math.abs(vector[i].numerator);
+                } else {
+                    main += Math.abs(vector[i].numerator) + "/" + Math.abs(vector[i].denominator);
+                }
+            }
+        }
+        return main;
+    }
 }

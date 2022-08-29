@@ -1,10 +1,10 @@
 import {Fraction} from "./Fraction";
 
-export function getGcd(a: number, b: number): number {
+export function findGcd(a: number, b: number): number {
     if (b === 0) {
         return a;
     }
-    return getGcd(b, a % b);
+    return findGcd(b, a % b);
 }
 
 export function determinant(matrix: Fraction[][]): Fraction {

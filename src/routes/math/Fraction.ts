@@ -1,4 +1,4 @@
-import {getGcd} from "./mathutil";
+import {findGcd} from "./mathutil";
 
 export class Fraction {
     public static readonly ZERO: Fraction = new Fraction(0, 1);
@@ -26,7 +26,7 @@ export class Fraction {
     }
 
     private normalize() {
-        const gcd = getGcd(this.numerator, this.denominator);
+        const gcd = findGcd(this.numerator, this.denominator);
         this._numerator /= gcd;
         this._denominator /= gcd;
     }
