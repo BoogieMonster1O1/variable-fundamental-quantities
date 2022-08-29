@@ -1,4 +1,10 @@
-<h1 class="text-3xl font-bold underline">
-  Hello world!
-</h1>
+<script>
+  import Main from "./Main.svelte";
+</script>
+
+<svelte:head>
+  <title>{`potatoes`}</title>
+</svelte:head>
+
+<Main/>
 
