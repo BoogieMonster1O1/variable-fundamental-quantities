@@ -33,7 +33,7 @@
     function convertAll(qtys: Quantity[]): SystemMatrix {
         let mat: SystemMatrix = new SystemMatrix(qtys);
         if (mat.incoherant) {
-            return;
+            return mat;
         }
         convertedQuantities = [];
         for (let quantity of Quantity.QUANTITIES) {
@@ -128,36 +128,35 @@
             <div class="flex justify-center text-center text-2xl text-blue-500 underline w-max">
                 <a href="https://github.com/BoogieMonster1O1/variable-fundamental-quantities.git">View epic code</a>
             </div>
+        </div>
 
+        <div class="flex flex-col text-center justify-center p-5">
             {#if systemMatrix.incoherant}
                 <div class="flex justify-center text-center text-xl">
                     <div class="text-red-500">
-                        <h1>The system matrix is incoherent. Please select different quantities.</h1>
+                        <h1>The system is incoherent.<br>Please select different quantities.</h1>
                     </div>
                 </div>
+                <br>
             {/if}
-        </div>
-        {#if !systemMatrix.incoherant}
-            <div class="flex flex-row text-center justify-center p-5">
-                <div class="flex justify-center text-center text-sm basis-4/5 overflow-y-scroll flex-grow">
-                    <table class="justify-center text-center border-separate border-spacing-1 border border-slate-500">
-                        <thead>
+            <div class="flex justify-center text-center text-sm basis-4/5 overflow-y-scroll flex-grow">
+                <table class="justify-center text-center border-separate border-spacing-1 border border-slate-500">
+                    <thead>
+                    <tr>
+                        <th class="text-center border border-slate-600">Quantity</th>
+                        <th class="text-center border border-slate-600">Unit</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {#each convertedQuantities as convertedQuantity}
                         <tr>
-                            <th class="text-center border border-slate-600">Quantity</th>
-                            <th class="text-center border border-slate-600">Unit</th>
+                            <td class="text-left border border-slate-600">{convertedQuantity.name}</td>
+                            <td class="text-left border border-slate-600 pr-2 pl-2" >{convertedQuantity.unit}</td>
                         </tr>
-                        </thead>
-                        <tbody>
-                        {#each convertedQuantities as convertedQuantity}
-                            <tr>
-                                <td class="text-left border border-slate-600">{convertedQuantity.name}</td>
-                                <td class="text-left border border-slate-600 pr-2 pl-2" >{convertedQuantity.unit}</td>
-                            </tr>
-                        {/each}
-                        </tbody>
-                    </table>
-                </div>
+                    {/each}
+                    </tbody>
+                </table>
             </div>
-        {/if}
+        </div>
     </div>
 </div>
