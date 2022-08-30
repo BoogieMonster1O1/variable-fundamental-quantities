@@ -20,4 +20,12 @@ describe('Conversion testing', function () {
 		const matrix = new SystemMatrix([Quantity.TIME, Quantity.LENGTH, Quantity.MASS, Quantity.ENERGY, Quantity.TEMPERATURE, Quantity.LUMINOUS_INTENSITY, Quantity.AMOUNT_OF_SUBSTANCE]);
 		expect(matrix.incoherant).toBe(true);
 	});
+
+	test('SI Quantities', function () {
+		const matrix = SystemMatrix.SI_QUANTITIES;
+		expect(matrix.incoherant).toBe(false);
+		expect(matrix.getUnitString(matrix.convert(Quantity.ELECTRIC_POTENTIAL))).toBe("s-3 m2 kg1 A-1");
+		expect(matrix.getUnitString(matrix.convert(Quantity.ELECTRIC_CHARGE))).toBe("s1 A1");
+		expect(matrix.getUnitString(matrix.convert(Quantity.CURRENT))).toBe("A1");
+	});
 });

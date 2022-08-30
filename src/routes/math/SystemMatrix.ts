@@ -1,8 +1,9 @@
 import { Fraction } from "./Fraction";
-import type {Quantity} from "./Quantity";
+import {Quantity} from "./Quantity";
 import {inverse} from "./mathutil";
 
 export class SystemMatrix {
+    public static readonly SI_QUANTITIES = new SystemMatrix([Quantity.TIME, Quantity.LENGTH, Quantity.MASS, Quantity.CURRENT, Quantity.TEMPERATURE, Quantity.LUMINOUS_INTENSITY, Quantity.AMOUNT_OF_SUBSTANCE]);
     private _quantities: Quantity[];
     private _matrix: Fraction[][];
     private _inverseMatrix: Fraction[][];
