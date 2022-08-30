@@ -15,12 +15,23 @@
         fifthQty = Quantity.TEMPERATURE.name,
         sixthQty = Quantity.LUMINOUS_INTENSITY.name,
         seventhQty = Quantity.AMOUNT_OF_SUBSTANCE.name;
+
+    function reset() {
+        firstQty = Quantity.TIME.name;
+        secondQty = Quantity.LENGTH.name;
+        thirdQty = Quantity.MASS.name;
+        fourthQty = Quantity.CURRENT.name;
+        fifthQty = Quantity.TEMPERATURE.name;
+        sixthQty = Quantity.LUMINOUS_INTENSITY.name;
+        seventhQty = Quantity.AMOUNT_OF_SUBSTANCE.name;
+    }
+
     let convertedQuantities: ConvertedQuantity[] = [];
     $: quantities = [Quantity.byName(firstQty), Quantity.byName(secondQty), Quantity.byName(thirdQty), Quantity.byName(fourthQty), Quantity.byName(fifthQty), Quantity.byName(sixthQty), Quantity.byName(seventhQty)];
     $: systemMatrix = convertAll(quantities);
 
     function convertAll(qtys: Quantity[]): SystemMatrix {
-        let mat: SystemMatrix = new SystemMatrix(quantities);
+        let mat: SystemMatrix = new SystemMatrix(qtys);
         if (mat.incoherant) {
             return;
         }
@@ -43,12 +54,12 @@
     <br><br>
     <br><br>
     <div class="flex flex-row text-center justify-center">
-        <div class="flex flex-col justify-center text-center basis-1/5 items-start h-max w-max">
+        <div class="flex flex-col justify-center text-center basis-3/5 items-start h-max w-max">
             <h1>Note: The <i>units</i> of all <i>quantities</i> are those specified by the SI system of units. (metre for length, joule for energy, henry for inductance, newton for force)</h1>
             <br><br>
-            <div class="flex flex-col justify-center text-center text-sm">
+            <div class="flex flex-col justify-center text-center text-xl">
                 <div class="flex justify-center text-center pb-2">
-                    <label for="firstqty">1st Fundamental Quantity:</label>
+                    <label for="firstqty">1st Fundamental Quantity: </label>
                     <select id="firstqty" bind:value={firstQty}>
                         {#each Quantity.QUANTITIES as qty}
                             <option value={qty.name}>{qty.name} ({qty.unit}, {qty.shortUnit})</option>
@@ -56,7 +67,7 @@
                     </select>
                 </div>
                 <div class="flex justify-center text-center pb-2">
-                    <label for="secondqty">2nd Fundamental Quantity:</label>
+                    <label for="secondqty">2nd Fundamental Quantity: </label>
                     <select id="secondqty" bind:value={secondQty}>
                         {#each Quantity.QUANTITIES as qty}
                             <option value={qty.name}>{qty.name} ({qty.unit}, {qty.shortUnit})</option>
@@ -64,7 +75,7 @@
                     </select>
                 </div>
                 <div class="flex justify-center text-center pb-2">
-                    <label for="thirdqty">3rd Fundamental Quantity:</label>
+                    <label for="thirdqty">3rd Fundamental Quantity: </label>
                     <select id="thirdqty" bind:value={thirdQty}>
                         {#each Quantity.QUANTITIES as qty}
                             <option value={qty.name}>{qty.name} ({qty.unit}, {qty.shortUnit})</option>
@@ -72,7 +83,7 @@
                     </select>
                 </div>
                 <div class="flex justify-center text-center pb-2">
-                    <label for="fourthqty">4th Fundamental Quantity:</label>
+                    <label for="fourthqty">4th Fundamental Quantity: </label>
                     <select id="fourthqty" bind:value={fourthQty}>
                         {#each Quantity.QUANTITIES as qty}
                             <option value={qty.name}>{qty.name} ({qty.unit}, {qty.shortUnit})</option>
@@ -80,7 +91,7 @@
                     </select>
                 </div>
                 <div class="flex justify-center text-center pb-2">
-                    <label for="fifthqty">5th Fundamental Quantity:</label>
+                    <label for="fifthqty">5th Fundamental Quantity: </label>
                     <select id="fifthqty" bind:value={fifthQty}>
                         {#each Quantity.QUANTITIES as qty}
                             <option value={qty.name}>{qty.name} ({qty.unit}, {qty.shortUnit})</option>
@@ -88,7 +99,7 @@
                     </select>
                 </div>
                 <div class="flex justify-center text-center pb-2">
-                    <label for="sixthqty">6th Fundamental Quantity:</label>
+                    <label for="sixthqty">6th Fundamental Quantity: </label>
                     <select id="sixthqty" bind:value={sixthQty}>
                         {#each Quantity.QUANTITIES as qty}
                             <option value={qty.name}>{qty.name} ({qty.unit}, {qty.shortUnit})</option>
@@ -96,13 +107,22 @@
                     </select>
                 </div>
                 <div class="flex justify-center text-center pb-2">
-                    <label for="seventhqty">7th Fundamental Quantity:</label>
+                    <label for="seventhqty">7th Fundamental Quantity: </label>
                     <select id="seventhqty" bind:value={seventhQty}>
                         {#each Quantity.QUANTITIES as qty}
                             <option value={qty.name}>{qty.name} ({qty.unit}, {qty.shortUnit})</option>
                         {/each}
                     </select>
                 </div>
+            </div>
+
+            <br>
+            <div class="flex justify-center text-center text-2xl">
+                <button class="transition duration-500 ease-in-out bg-blue-500 hover:bg-red-700 text-white py-2 px-4 rounded" on:click={() => {
+                    reset();
+                }}>
+                    Reset to Default
+                </button>
             </div>
 
             {#if systemMatrix.incoherant}
