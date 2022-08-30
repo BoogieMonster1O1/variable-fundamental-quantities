@@ -46,13 +46,13 @@
     }
 </script>
 
-<div class="flex flex-col font-epicfont justify-center text-center pt-4 max-h-screen h-screen">
-    <header class="fixed top-0 flex justify-center flex-col text-center w-full border-b border-gray-400 bg-white">
+<div class="flex flex-col font-epicfont justify-center text-center pt-4 max-h-screen">
+    <header class="pt-5 flex justify-center flex-col text-center w-full border-b border-gray-400 bg-white">
         <div class="text-5xl"><h1>Variable Fundamental Quantities</h1></div>
-        <div class="text-2xl"><h1>Powered by Matrices ™</h1></div>
+        <div class="text-2xl pt-2"><h1>Powered by Matrices ™</h1></div>
     </header>
-    <br><br>
-    <br><br>
+    <br>
+    <br>
     <div class="flex flex-row text-center justify-center">
         <div class="flex flex-col justify-center text-center basis-3/5 items-start h-max w-max">
             <h1>Note: The <i>units</i> of all <i>quantities</i> are those specified by the SI system of units. (metre for length, joule for energy, henry for inductance, newton for force)</h1>
@@ -139,7 +139,7 @@
                 </div>
                 <br>
             {/if}
-            <div class="flex justify-center text-center text-sm basis-4/5 overflow-y-scroll flex-grow">
+            <div class="flex justify-center text-center text-sm basis-4/5 overflow-y-scroll flex-grow max-h-screen">
                 <table class="justify-center text-center border-separate border-spacing-1 border border-slate-500">
                     <thead>
                     <tr>
