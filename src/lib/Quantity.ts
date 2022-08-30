@@ -130,7 +130,6 @@ export class Quantity {
     public static readonly ELECTRIC_CONDUCTANCE: Quantity = Quantity.of("Electric Conductance", {unit: "siemens", shortUnit: "S", length: Fraction.ofWhole(-2), mass: Fraction.ofWhole(-1), time: Fraction.ofWhole(3), current: Fraction.ofWhole(2)});
     public static readonly MAGNETIC_FLUX: Quantity = Quantity.of("Magnetic Flux", {unit: "weber", shortUnit: "Wb", length: Fraction.ofWhole(2), mass: Fraction.ofWhole(1), time: Fraction.ofWhole(-2), current: Fraction.ofWhole(-1)});
     public static readonly MAGNETIC_FLUX_DENSITY: Quantity = Quantity.of("Magnetic Flux Density", {unit: "tesla", shortUnit: "T", mass: Fraction.ofWhole(1), time: Fraction.ofWhole(-2), current: Fraction.ofWhole(-1)});
-    public static readonly MAGNETIC_FIELD: Quantity = Quantity.of("Magnetic field", {unit: "tesla", shortUnit: "T", mass: Fraction.ofWhole(1), time: Fraction.ofWhole(-2), current: Fraction.ofWhole(-1)});
     public static readonly INDUCTANCE: Quantity = Quantity.of("Inductance", {unit: "henry", shortUnit: "H", length: Fraction.ofWhole(2), mass: Fraction.ofWhole(1), time: Fraction.ofWhole(-2), current: Fraction.ofWhole(-2)});
     public static readonly CURRENT_DENSITY: Quantity = Quantity.of("Current Density", {unit: "ampere/sq. meter", shortUnit: "A/m²", length: Fraction.ofWhole(-2), current: Fraction.ofWhole(1)});
     public static readonly MAGNETIC_FIELD_STRENGTH: Quantity = Quantity.of("Magnetic Field Strength", {unit: "ampere/meter", shortUnit: "A/m", length: Fraction.ofWhole(-1), current: Fraction.ofWhole(1)});
