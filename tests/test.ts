@@ -1,5 +1,5 @@
-import {SystemMatrix} from "../src/routes/math/SystemMatrix";
-import {Quantity} from "../src/routes/math/Quantity";
+import {SystemMatrix} from "../src/lib/SystemMatrix";
+import {Quantity} from "../src/lib/Quantity";
 
 describe('Conversion testing', function () {
 	test('Charge test', function () {
