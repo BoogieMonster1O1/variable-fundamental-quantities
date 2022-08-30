@@ -19,15 +19,22 @@
     $: quantities = [Quantity.byName(firstQty), Quantity.byName(secondQty), Quantity.byName(thirdQty), Quantity.byName(fourthQty), Quantity.byName(fifthQty), Quantity.byName(sixthQty), Quantity.byName(seventhQty)];
     $: systemMatrix = new SystemMatrix(quantities);
 
+    convertAll()
+
     function convertAll() {
-        if (systemMatrix.incoherant) {
+        let mat: SystemMatrix;
+        if (!systemMatrix) {
+            mat = SystemMatrix.SI_QUANTITIES;
+        } else if (systemMatrix.incoherant) {
             return;
+        } else {
+            mat = systemMatrix;
         }
         convertedQuantities = [];
         for (let quantity of Quantity.QUANTITIES) {
             convertedQuantities.push({
                 name: quantity.name,
-                unit: systemMatrix.getUnitString(systemMatrix.convert(quantity))
+                unit: mat.getUnitString(mat.convert(quantity))
             });
         }
     }
@@ -107,28 +114,30 @@
             </div>
         </div>
     {:else}
-        <div class="flex">
+        <div class="flex justify-center text-center text-4xl">
             <button class="btn btn-primary" on:click={convertAll}>Convert</button>
         </div>
         <br>
 
-        <div class="flex justify-center text-center text-xl">
-            <table class="w-full">
-                <thead>
+        <div class="flex flex-row text-center justify-center">
+            <div class="flex justify-center text-center text-xl basis-1/2">
+                <table class="justify-center text-center border-separate border-spacing-2 border border-slate-500">
+                    <thead>
                     <tr>
-                        <th class="text-left">Quantity</th>
-                        <th class="text-left">Unit</th>
+                        <th class="text-center border border-slate-600">Quantity</th>
+                        <th class="text-center border border-slate-600">Unit</th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     {#each convertedQuantities as convertedQuantity}
                         <tr>
-                            <td class="text-left">{convertedQuantity.name}</td>
-                            <td class="text-left">{convertedQuantity.unit}</td>
+                            <td class="text-left border border-slate-600">{convertedQuantity.name}</td>
+                            <td class="text-left border border-slate-600 pr-2 pl-2" >{convertedQuantity.unit}</td>
                         </tr>
                     {/each}
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     {/if}
 </div>
