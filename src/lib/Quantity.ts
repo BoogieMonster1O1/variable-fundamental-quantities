@@ -36,6 +36,10 @@ export class Quantity {
     private readonly _vector: Fraction[];
     private readonly _name: string;
 
+    public static byName(name: string): Quantity {
+        return Quantity.QUANTITIES.find(q => q.name === name)!;
+    }
+
     public static of(name: string, {unit, shortUnit, time = Fraction.ZERO, length = Fraction.ZERO, mass = Fraction.ZERO, current = Fraction.ZERO, temperature = Fraction.ZERO, luminousIntensity = Fraction.ZERO, amountOfSubstance = Fraction.ZERO}: Parameters): Quantity {
         const quantity: Quantity =  new Quantity(name, unit, shortUnit, [time, length, mass, current, temperature, luminousIntensity, amountOfSubstance]);
         Quantity.QUANTITIES.push(quantity);
