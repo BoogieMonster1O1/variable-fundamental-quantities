@@ -154,7 +154,7 @@ export class Quantity {
     // Light and Optics
     public static readonly LENS_POWER: Quantity = Quantity.of("Lens Power", {unit: "dioptre", shortUnit: "D", length: Fraction.ofWhole(-1)});
     public static readonly LUMINOUS_FLUX: Quantity = Quantity.of("Luminous Flux", {unit: "lumen", shortUnit: "lm", luminousIntensity: Fraction.ofWhole(1)});
-    public static readonly ILLUMINANCE: Quantity = Quantity.of("Illuminance", {unit: "lux", shortUnit: "lx", length: Fraction.ofWhole(2), luminousIntensity: Fraction.ofWhole(1)});
+    public static readonly ILLUMINANCE: Quantity = Quantity.of("Illuminance", {unit: "lux", shortUnit: "lx", length: Fraction.ofWhole(-2), luminousIntensity: Fraction.ofWhole(1)});
 
     // Fluid dynamics
     public static readonly ABSEMENT: Quantity = Quantity.of("Absement", {unit: "meter second", shortUnit: "m s", time: Fraction.ofWhole(1), length: Fraction.ofWhole(1)});
