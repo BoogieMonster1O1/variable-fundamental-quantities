@@ -124,6 +124,10 @@
                     Reset to Default
                 </button>
             </div>
+            <br>
+            <div class="flex justify-center text-center text-2xl text-blue-500 underline w-max">
+                <a href="https://github.com/BoogieMonster1O1/variable-fundamental-quantities.git">View epic code</a>
+            </div>
 
             {#if systemMatrix.incoherant}
                 <div class="flex justify-center text-center text-xl">
