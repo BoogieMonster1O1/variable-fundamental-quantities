@@ -97,11 +97,6 @@ export class Quantity {
         return this._shortUnit;
     }
 
-    // Dimensionless
-    public static readonly NULL: Quantity = Quantity.of("Null", {unit: "", shortUnit: ""});
-    public static readonly ANGLE: Quantity = Quantity.of("Angle", {unit: "radian", shortUnit: "rad"});
-    public static readonly SOLID_ANGLE: Quantity = Quantity.of("Solid angle", {unit: "steradian", shortUnit: "sr"});
-
     // Fundamental quantities
     public static readonly TIME: Quantity = Quantity.of("Time", {unit: "second", shortUnit: "s", time: Fraction.ofWhole(1)});
     public static readonly LENGTH: Quantity = Quantity.of("Length", {unit: "meter", shortUnit: "m", length: Fraction.ofWhole(1)});
