@@ -1,4 +1,4 @@
-import type { Fraction } from "./Fraction";
+import { Fraction } from "./Fraction";
 import type {Quantity} from "./Quantity";
 import {inverse} from "./mathutil";
 
@@ -35,10 +35,13 @@ export class SystemMatrix {
         if (this.incoherent) {
             throw new Error("SystemMatrix is incoherent");
         }
-        // Multiply qty (1xn) by inverse matrix (nxn)
-        return this._inverseMatrix.map(row => {
-            return row.reduce((a, b) => a.multiply(b), qty.vector[0]);
-        });
+        const result: Fraction[] = [Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, Fraction.ZERO, Fraction.ZERO]
+        for (let i = 0; i < this._inverseMatrix[0].length; i++) {
+            for (let j = 0; j < this._inverseMatrix.length; j++) {
+                result[i] = result[i].add(this._inverseMatrix[j][i].multiply(qty.vector[j]));
+            }
+        }
+        return result;
     }
 
     public getUnitString(vector: Fraction[]): string {
@@ -58,5 +61,36 @@ export class SystemMatrix {
             }
         }
         return main;
+    }
+
+    public debugPrintMatrix(): void {
+        let message = "";
+        message += "SystemMatrix: " + this.quantities.length + " quantities\n";
+        message += "Matrix: " + this.matrix.length + "x" + this.matrix[0].length + "\n";
+        message += "InverseMatrix: " + this.inverseMatrix.length + "x" + this.inverseMatrix[0].length + "\n";
+        message += "Incoherent: " + this.incoherant + "\n";
+        message += "Matrix:\n";
+        for (let i = 0; i < this.matrix.length; i++) {
+            message += "[";
+            for (let j = 0; j < this.matrix[i].length; j++) {
+                message += this.matrix[i][j].toString();
+                if (j < this.matrix[i].length - 1) {
+                    message += ", ";
+                }
+            }
+            message += "]\n";
+        }
+        message += "InverseMatrix:\n";
+        for (let i = 0; i < this.inverseMatrix.length; i++) {
+            message += "[";
+            for (let j = 0; j < this.inverseMatrix[i].length; j++) {
+                message += this.inverseMatrix[i][j].toString();
+                if (j < this.inverseMatrix[i].length - 1) {
+                    message += ", ";
+                }
+            }
+            message += "]\n";
+        }
+        console.log(message);
     }
 }

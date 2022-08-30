@@ -19,49 +19,12 @@ export function determinant(matrix: Fraction[][]): Fraction {
     }
     let result = Fraction.ZERO;
     for (let i = 0; i < matrix[0].length; i++) {
-        const minor: Fraction[][] = [];
-        for (let j = 1; j < matrix.length; j++) {
-            const minorRow: Fraction[] = [];
-            for (let k = 0; k < matrix[0].length; k++) {
-                if (k !== i) {
-                    minorRow.push(matrix[j][k]);
-                }
-            }
-            minor.push(minorRow);
-        }
+        const minor1: Fraction[][] = minor(matrix, 0, i);
         if (i % 2 === 0) {
-            result = result.add(matrix[0][i].multiply(determinant(minor)));
+            result = result.add(matrix[0][i].multiply(determinant(minor1)));
         } else {
-            result = result.subtract(matrix[0][i].multiply(determinant(minor)));
+            result = result.subtract(matrix[0][i].multiply(determinant(minor1)));
         }
-    }
-    return result;
-}
-
-export function adjoint(matrix: Fraction[][]): Fraction[][] {
-    const result: Fraction[][] = [];
-    for (let i = 0; i < matrix[0].length; i++) {
-        const row: Fraction[] = [];
-        for (let j = 0; j < matrix.length; j++) {
-            const minor: Fraction[][] = [];
-            for (let k = 0; k < matrix[0].length; k++) {
-                if (k !== i) {
-                    const minorRow: Fraction[] = [];
-                    for (let l = 0; l < matrix.length; l++) {
-                        if (l !== j) {
-                            minorRow.push(matrix[l][k]);
-                        }
-                    }
-                    minor.push(minorRow);
-                }
-            }
-            if (i % 2 === 0) {
-                row.push(determinant(minor));
-            } else {
-                row.push(determinant(minor).negate());
-            }
-        }
-        result.push(row);
     }
     return result;
 }
@@ -71,11 +34,55 @@ export function inverse(matrix: Fraction[][]): Fraction[][] {
     if (det.numerator === 0) {
         return [];
     }
-    const adjointMatrix = adjoint(matrix);
+    const adjointMatrix = adjunct(matrix);
     for (let i = 0; i < adjointMatrix.length; i++) {
         for (let j = 0; j < adjointMatrix[0].length; j++) {
             adjointMatrix[i][j] = adjointMatrix[i][j].divide(det);
         }
     }
     return adjointMatrix;
+}
+
+export function adjunct(matrix: Fraction[][]) {
+    const result: Fraction[][] = [];
+    for (let i = 0; i < matrix.length; i++) {
+        const row: Fraction[] = [];
+        for (let j = 0; j < matrix[0].length; j++) {
+            if ((i + j) % 2 === 0) {
+                row.push(determinant(minor(matrix, i, j)));
+            } else {
+                row.push(determinant(minor(matrix, i, j)).negate());
+            }
+        }
+        result.push(row);
+    }
+    return transpose(result)
+}
+
+export function minor(matrix: Fraction[][], row: number, column: number): Fraction[][] {
+    const result: Fraction[][] = [];
+    for (let i = 0; i < matrix.length; i++) {
+        if (i !== row) {
+            const row: Fraction[] = [];
+            for (let j = 0; j < matrix[0].length; j++) {
+                if (j !== column) {
+                    row.push(matrix[i][j]);
+                }
+            }
+            result.push(row);
+        }
+    }
+    return result;
+}
+
+export function transpose(matrix: Fraction[][]): Fraction[][] {
+    const result: Fraction[][] = [];
+    for (let i = 0; i < matrix[0].length; i++) {
+        const row: Fraction[] = [];
+        for (let j = 0; j < matrix.length; j++) {
+            row.push(matrix[j][i]);
+        }
+        result.push(row);
+    }
+    return result;
 }

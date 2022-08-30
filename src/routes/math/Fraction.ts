@@ -40,6 +40,9 @@ export class Fraction {
     }
 
     public toString(): string {
+        if (this.isInteger()) {
+            return this.numerator.toString();
+        }
         return `${this.numerator}/${this.denominator}`;
     }
 
